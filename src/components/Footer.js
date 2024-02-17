@@ -22,7 +22,7 @@ const Footer = () => {
             </div>
           </div>
         </section>
-        {/* footer section */}
+        
 
         <footer>
           <div className="container grid grid-four-column">
