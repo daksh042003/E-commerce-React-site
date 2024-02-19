@@ -35,13 +35,16 @@ const filterReducer = (state, action) => {
         let tempSortProduct = [...filter_products];
   
         const sortingProducts = (a, b) => {
-          if (sorting_value === "lowest") {
-            return a.price - b.price;
-          }
-  
-          if (sorting_value === "highest") {
+        if (sorting_value === "highest") {
+              return a.price - b.price;
+        }
+
+
+            if (sorting_value === "lowest") {
             return b.price - a.price;
           }
+  
+         
   
           if (sorting_value === "a-z") {
             return a.name.localeCompare(b.name);
