@@ -35,16 +35,13 @@ const filterReducer = (state, action) => {
         let tempSortProduct = [...filter_products];
   
         const sortingProducts = (a, b) => {
-        if (sorting_value === "highest") {
-              return a.price - b.price;
-        }
-
-
-            if (sorting_value === "lowest") {
-            return b.price - a.price;
+          if (sorting_value === "lowest") {
+            return a.price - b.price;
           }
   
-         
+          if (sorting_value === "highest") {
+            return b.price - a.price;
+          }
   
           if (sorting_value === "a-z") {
             return a.name.localeCompare(b.name);
@@ -60,6 +57,51 @@ const filterReducer = (state, action) => {
         return {
           ...state,
           filter_products: newSortData,
+        };
+  
+      case "UPDATE_FILTERS_VALUE":
+        const { name, value } = action.payload;
+  
+        return {
+          ...state,
+          filters: {
+            ...state.filters,
+            [name]: value,
+          },
+        };
+  
+      case "FILTER_PRODUCTS":
+        let { all_products } = state;
+        let tempFilterProduct = [...all_products];
+  
+        const { text, category, company, color } = state.filters;
+  
+        if (text) {
+          tempFilterProduct = tempFilterProduct.filter((curElem) => {
+            return curElem.name.toLowerCase().includes(text);
+          });
+        }
+  
+        if (category !== "all") {
+          tempFilterProduct = tempFilterProduct.filter(
+            (curElem) => curElem.category === category
+          );
+        }
+  
+        if (company !== "all") {
+          tempFilterProduct = tempFilterProduct.filter(
+            (curElem) => curElem.company.toLowerCase() === company.toLowerCase()
+          );
+        }
+  
+        if (color) {
+          tempFilterProduct = tempFilterProduct.filter((curElem) =>
+            curElem.colors.includes(color)
+          );
+        }
+        return {
+          ...state,
+          filter_products: tempFilterProduct,
         };
   
       default:
