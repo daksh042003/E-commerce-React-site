@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
-import { FaCheck } from "react-icons/fa";
+// import { FaCheck } from "react-icons/fa";
 
 const FilterSection = () => {
   const {
